@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+  postgres:
+    image: postgres:13.3-alpine
+    container_name: 'postgres'
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=applicationloan
+    ports:
+      - 5432:5432
+    networks:
+      - postgresnetwork
+
+  keycloak:
+    image: jboss/keycloak:11.0.2
+    container_name: keycloak
+    environment:
+      - KEYCLOAK_USER=spring
+      - KEYCLOAK_PASSWORD=spring123
+      - KEYCLOAK_MIGRATION_STRATEGY=OVERWRITE_EXISTING
+      - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-viaconto.json
+    volumes:
+      - .:/opt/jboss/keycloak/imports
+    ports:
+      - '8888:8080'
+    networks:
+      - keycloaknetwork
+
+networks:
+  postgresnetwork:
+  keycloaknetwork:

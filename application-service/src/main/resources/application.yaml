@@ -1,0 +1,31 @@
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+server:
+  port: 8081
+spring:
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/applicationloan
+    username: postgres
+  flyway:
+    baseline-on-migrate: true
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  profiles:
+    active: local
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8888/auth/realms/viaconto

@@ -5,6 +5,14 @@ The project is focused on api, Due to limitation of time, the front end part is 
 # Project Architecture
 ![Screenshot](flow_diagram.png)
 
+Stack:
+ - Spring Boot / java 11
+ - Spring cloud gateway
+ - Spring Oauth 2 security
+ - Keycloak
+ - Flyway
+ - Postgres
+
 # Getting Started
 ## Prerequisites
 The following tools need to be installed in order to run the project:
@@ -91,9 +99,9 @@ After register user, we can replace the username / password in postman API and m
 
 With pre-configured data in docker compose that already setup, which including:
 
-- Client id and client secret: so our gateway can use it as OAuth2 client
+- Client id and client secret: Our gateway can use it as OAuth2 client
 
-- Oauth 2 Scope: which is allow us to check in our Resource Server (application-service)
+- Oauth 2 Scope: Allow us to check in our Resource Server (application-service)
 
 - Users: store user information, login / registering features. 
 

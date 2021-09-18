@@ -7,7 +7,7 @@ create table application_loan
     birth_date        timestamp,
     salary            decimal,
     monthly_liability decimal,
-    requested_mount   decimal,
+    requested_amount   decimal,
     score             decimal,
     status            varchar(30),
     requested_term    smallint,

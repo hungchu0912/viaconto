@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "c104bb4e-0aa2-400b-8458-02a492ad697f",
+		"name": "viaconto assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Get Token with password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"accessToken\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "viaconto-client",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "31c4ff73-2b74-45ca-9f7e-e3a9cc7d9d7a",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "operation_user",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8888/auth/realms/viaconto/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"auth",
+						"realms",
+						"viaconto",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Create Loan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"personalId\": \"1234\",\n    \"firstName\": \"Hung\",\n    \"lastName\": \"Chu\",\n    \"birthDate\": \"2000-12-11T11:40:49Z\",\n    \"salary\": 3500,\n    \"monthlyLiability\": 1111,\n    \"requestedAmount\": 2222,\n    \"requestedTerm\": 2\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/application/loans",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"application",
+						"loans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Get Loan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/application/loans/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"application",
+						"loans",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Update Loan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"personalId\": \"1234\",\n    \"firstName\": \"Hung\",\n    \"lastName\": \"Chu\",\n    \"birthDate\": \"2000-12-11T11:40:49Z\",\n    \"salary\": 123444,\n    \"monthlyLiability\": 1111,\n    \"requestedAmount\": 2222,\n    \"requestedTerm\": 2\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/application/loans/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"application",
+						"loans",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Search Loans",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/application/loans?page=0&size=5&sort=id",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"application",
+						"loans"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "sort",
+							"value": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. Update Loan Status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"APPROVED\"\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/application/loans/1/status",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"application",
+						"loans",
+						"1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

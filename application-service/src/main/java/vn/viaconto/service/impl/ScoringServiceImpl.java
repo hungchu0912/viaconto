@@ -23,22 +23,20 @@ public class ScoringServiceImpl implements ScoringService {
     // - (Julian day of the year of birth (1st Feb = 32, etc.))
     @Override
     public void calculateScoreAndStatus(ApplicationLoan loanEntity) {
-        BigDecimal firstNameSum    = BigDecimal.valueOf(loanEntity.getFirstName().chars().map(i -> i - 96).sum());
-        BigDecimal salaryScore     = loanEntity.getSalary().multiply(BigDecimal.valueOf(1.5));
-        BigDecimal mothlyLiability = loanEntity.getMonthlyLiability().multiply(BigDecimal.valueOf(3));
-        LocalDate  localBirthDate  = loanEntity.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        BigDecimal year            = BigDecimal.valueOf(localBirthDate.getYear());
-        BigDecimal month           = BigDecimal.valueOf(localBirthDate.getMonthValue());
-        BigDecimal day             = BigDecimal.valueOf(localBirthDate.getDayOfYear());
-        BigDecimal result          = firstNameSum.add(salaryScore).subtract(mothlyLiability).add(year).subtract(month).subtract(day);
+        BigDecimal firstNameSum     = BigDecimal.valueOf(loanEntity.getFirstName().chars().map(i -> i - 96).sum());
+        BigDecimal salaryScore      = loanEntity.getSalary().multiply(BigDecimal.valueOf(1.5));
+        BigDecimal monthlyLiability = loanEntity.getMonthlyLiability().multiply(BigDecimal.valueOf(3));
+        LocalDate  localBirthDate   = loanEntity.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        BigDecimal year             = BigDecimal.valueOf(localBirthDate.getYear());
+        BigDecimal month            = BigDecimal.valueOf(localBirthDate.getMonthValue());
+        BigDecimal day              = BigDecimal.valueOf(localBirthDate.getDayOfYear());
+        BigDecimal result           = firstNameSum.add(salaryScore).subtract(monthlyLiability).add(year).subtract(month).subtract(day);
         loanEntity.setScore(result);
         if (result.compareTo(BigDecimal.valueOf(2500)) < 0) {
             loanEntity.setStatus(ApplicationStatus.REJECTED);
-        }
-        else if (result.compareTo(BigDecimal.valueOf(3500)) > 0) {
+        } else if (result.compareTo(BigDecimal.valueOf(3500)) > 0) {
             loanEntity.setStatus(ApplicationStatus.APPROVED);
-        }
-        else {
+        } else {
             loanEntity.setStatus(ApplicationStatus.MANUAL);
         }
     }

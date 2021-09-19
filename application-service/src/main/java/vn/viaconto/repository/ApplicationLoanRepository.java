@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import vn.viaconto.entity.ApplicationLoan;
 
 @Repository
-public interface ApplicationLoanRepository extends PagingAndSortingRepository<ApplicationLoan, Long>, JpaSpecificationExecutor<ApplicationLoan>{
+public interface ApplicationLoanRepository extends PagingAndSortingRepository<ApplicationLoan, Long>, JpaSpecificationExecutor<ApplicationLoan> {
 }

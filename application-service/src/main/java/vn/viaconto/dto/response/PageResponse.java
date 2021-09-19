@@ -1,13 +1,12 @@
 package vn.viaconto.dto.response;
 
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 @Setter
 @Getter

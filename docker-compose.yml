@@ -2,7 +2,7 @@ version: "3.3"
 services:
   postgres:
     image: postgres:13.3-alpine
-    container_name: 'postgres'
+    container_name: 'postgres-viaconto'
     restart: always
     environment:
       - POSTGRES_USER=postgres

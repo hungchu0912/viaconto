@@ -19,7 +19,7 @@ import java.util.List;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    protected ResponseEntity<Object> handleOtherException(Exception ex){
+    protected ResponseEntity<Object> handleOtherException(Exception ex) {
         log.error("General Exception", ex);
         return handleException(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -10,9 +10,13 @@ import vn.viaconto.entity.ApplicationLoan;
 
 public interface ApplicationLoanService {
     ApplicationLoanResponseDTO getLoan(Long id);
+
     ApplicationLoanResponseDTO createLoan(CreateApplicationLoanCommand command);
+
     PageResponse<ApplicationLoanResponseDTO> getApplicationList(Pageable pageable, Specification<ApplicationLoan> specs);
+
     ApplicationLoanResponseDTO updateLoan(Long id, CreateApplicationLoanCommand command);
+
     ApplicationLoanResponseDTO updateStatus(Long id, UpdateApplicationLoanStatusCommand command);
 }
 

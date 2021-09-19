@@ -18,12 +18,12 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Collec
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         Collection<GrantedAuthority> grantedAuthorities = jwtGrantedAuthoritiesConverter.convert(jwt);
-        final Map<String, Object> realmAccess = (Map<String, Object>) jwt.getClaims().get("realm_access");
+        final Map<String, Object>    realmAccess        = (Map<String, Object>) jwt.getClaims().get("realm_access");
         grantedAuthorities.addAll(
-                ((List<String>)realmAccess.get("roles")).stream()
-                .map(roleName -> "ROLE_" + roleName) // prefix to map to a Spring Security "role"
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList()));
+                ((List<String>) realmAccess.get("roles")).stream()
+                        .map(roleName -> "ROLE_" + roleName) // prefix to map to a Spring Security "role"
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList()));
         return grantedAuthorities;
     }
 }

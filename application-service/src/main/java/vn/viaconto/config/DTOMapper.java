@@ -10,6 +10,8 @@ import vn.viaconto.entity.ApplicationLoan;
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface DTOMapper {
     ApplicationLoanResponseDTO toApplicationLoanResponseDto(ApplicationLoan applicationLoan);
+
     ApplicationLoan toApplicationLoanEntity(CreateApplicationLoanCommand command);
+
     void updateApplicationLoan(CreateApplicationLoanCommand command, @MappingTarget ApplicationLoan applicationLoan);
 }

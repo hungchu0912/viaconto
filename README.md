@@ -1,4 +1,6 @@
 # Viaconto assignment
+[Original requirement](twino-test-task.md)
+
 Demo application for creating, updating, searching Application Loans.
 The project is focused on api, Due to limitation of time, the front end part is excluded
 
@@ -43,29 +45,19 @@ The docker-compose already included some data setup for user:
 
 > normal_user / 123456
 
-The application service provided 5 REST API. Normal user can only access 4 related to Loans, and operation user can access all of these APIs including updating loan's status.
-
-API for normal user:
-
-> POST localhost:8080/application/loans
-
-> GET localhost:8080/application/loans/{id}
-
-> PUT localhost:8080/application/loans/{id}
-
-> GET localhost:8080/application/loans?page=0&size=5&sort=id
-
-API for operation user:
-
-> PUT localhost:8080/application/loans/1/status
-
 Further information about role and client setup, please refer on next section about keycloak
 
-Postman collection and environment is attached in the ./postman folder. Import them and running the it sequentially from 1 -> 6 to see the result. Please find the description for each API as below:
+## Postman
+
+Postman collection and environment attached in the ./postman folder.
+
+Normal user can only access 4 APIs related to Loans, and operation user can access all of these APIs including updating loan's status.
+
+Import both of them and running the it sequentially from 1 -> 6 to see the result. Please find the description for each API as below:
 
 1. Get Token with password
 
-   This API calling keycloak directly to get the jwt token. Will be used for subsequent API calls. The client_id and client_secret is pre-configured in the keycloak. The username and password will be the end user's credentials.
+   This API calling keycloak directly to get the jwt token. Will be used for subsequent API calls. The client_id and client_secret pre-configured in the keycloak. The username and password will be the end user's credentials.
    
 2. Create Loan
 
@@ -89,7 +81,7 @@ Postman collection and environment is attached in the ./postman folder. Import t
    
 ## Register user
 
-Normal users can go to http://localhost:8080/ . It will redirect user to keycloak's login page. Here you can either login or register new user. After login / register, browser will redirect to gateway homepage, which is just an welcome page.
+Normal users can go to http://localhost:8080/ . It will redirect user to keycloak's login page. Here you can either login or register new user. After login / register, browser will redirect to gateway homepage, which is just a welcome page.
 
 After register user, we can replace the username / password in postman API and make call
 
